@@ -1,8 +1,9 @@
 #Download base image ubuntu latest
 FROM ubuntu:latest
 
+ARG PHP_MEMORY_LIMIT=512M
 ENV PHP_MAX_EXECUTION_TIME=90
-ENV PHP_MEMORY_LIMIT=512M
+ENV PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT
  
 # Update Software repository
 RUN apt-get update
@@ -14,16 +15,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     apache2 memcached php-memcached mc mysql-client htop
 
 # Configuration for Apache
-RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
 ADD ./apache.conf /etc/apache2/sites-available/
-RUN ln -s /etc/apache2/sites-available/apache.conf /etc/apache2/sites-enabled/
 ADD ./apache-ssl.conf /etc/apache2/sites-available/
-RUN ln -s /etc/apache2/sites-available/apache-ssl.conf /etc/apache2/sites-enabled/
-RUN a2enmod rewrite
-RUN a2enmod headers
-RUN wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64
-RUN chmod +x mhsendmail_linux_amd64
-RUN mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
+RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
+    ln -s /etc/apache2/sites-available/apache.conf /etc/apache2/sites-enabled/ && \
+    ln -s /etc/apache2/sites-available/apache-ssl.conf /etc/apache2/sites-enabled/ && \
+    a2enmod rewrite && a2enmod headers && \
+    wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 && \
+    chmod +x mhsendmail_linux_amd64 && mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
 RUN echo 'sendmail_path="/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025 --from=no-reply@docker.docker"' >> /etc/php/7.2/cli/php.ini
 RUN echo 'sendmail_path="/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025 --from=no-reply@docker.docker"' >> /etc/php/7.2/apache2/php.ini
 RUN echo "memory_limit = ${PHP_MEMORY_LIMIT}" >> /etc/php/7.2/apache2/php.ini
