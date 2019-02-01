@@ -1,15 +1,11 @@
-#Download base image ubuntu latest
 FROM ubuntu:latest
 
-# Update Software repository
-# Install nginx, php-fpm and supervisord from ubuntu repository
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     apt-utils php php-phar php-iconv php-mysql wget \
     curl php-curl php-mbstring php-dom php-gd sendmail \
     apache2 memcached php-memcached mc mysql-client htop
 
-# Configuration for Apache
 ADD ./apache.conf /etc/apache2/sites-available/
 ADD ./apache-ssl.conf /etc/apache2/sites-available/
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
