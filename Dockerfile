@@ -1,8 +1,8 @@
 #Download base image ubuntu latest
 FROM ubuntu:latest
 
-ENV PHP_MAX_EXECUTION_TIME
-ENV PHP_MEMORY_LIMIT
+ENV PHP_MAX_EXECUTION_TIME=90
+ENV PHP_MEMORY_LIMIT=512M
  
 # Update Software repository
 RUN apt-get update
