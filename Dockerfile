@@ -5,7 +5,7 @@ FROM ubuntu:latest
 # Install nginx, php-fpm and supervisord from ubuntu repository
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    apt-utils php php-phar php-iconv php-mysql wget\
+    apt-utils php php-phar php-iconv php-mysql wget \
     curl php-curl php-mbstring php-dom php-gd sendmail \
     apache2 memcached php-memcached mc mysql-client htop
 
@@ -21,7 +21,7 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     echo 'sendmail_path="/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025 --from=no-reply@docker.docker"' >> /etc/php/7.2/cli/php.ini && \
     echo 'sendmail_path="/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025 --from=no-reply@docker.docker"' >> /etc/php/7.2/apache2/php.ini && \
     echo "memory_limit=512M" >> /etc/php/7.2/apache2/php.ini && \
-    echo "max_execution_time=90 >> /etc/php/7.2/apache2/php.ini && \
+    echo "max_execution_time=90" >> /etc/php/7.2/apache2/php.ini && \
     echo "memory_limit=512M" >> /etc/php/7.2/cli/php.ini && \
     echo "max_execution_time=90" >> /etc/php/7.2/cli/php.ini
 CMD apachectl -D FOREGROUND
