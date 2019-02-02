@@ -6,7 +6,6 @@ RUN apt-get update && \
     curl php-curl php-mbstring php-dom php-gd sendmail \
     apache2 memcached php-memcached mc mysql-client htop
 
-ENV APACHE_DOCUMENT_ROOT=docroot
 ADD ./apache.conf /etc/apache2/sites-available/
 ADD ./apache-ssl.conf /etc/apache2/sites-available/
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
