@@ -11,7 +11,7 @@ ADD ./apache-ssl.conf /etc/apache2/sites-available/
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     ln -s /etc/apache2/sites-available/apache.conf /etc/apache2/sites-enabled/ && \
     ln -s /etc/apache2/sites-available/apache-ssl.conf /etc/apache2/sites-enabled/ && \
-    a2enmod rewrite && a2enmod headers && \
+    a2enmod rewrite && a2enmod headers && a2enmod ssl \
     wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 && \
     chmod +x mhsendmail_linux_amd64 && mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail && \
     echo 'sendmail_path="/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025 --from=no-reply@docker.docker"' >> /etc/php/7.2/cli/php.ini && \
