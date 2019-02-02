@@ -20,7 +20,5 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     echo "memory_limit=512M" >> /etc/php/7.2/apache2/php.ini && \
     echo "max_execution_time=90" >> /etc/php/7.2/apache2/php.ini && \
     echo "memory_limit=512M" >> /etc/php/7.2/cli/php.ini && \
-    echo "max_execution_time=90" >> /etc/php/7.2/cli/php.ini && \
-    sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
-    sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+    echo "max_execution_time=90" >> /etc/php/7.2/cli/php.ini
 CMD apachectl -D FOREGROUND
