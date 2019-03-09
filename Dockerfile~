@@ -21,9 +21,6 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     cat /tmp/php.ini >> /etc/php/7.2/cli/php.ini && \
     git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && \
     ~/.bash_it/install.sh && \
-    sed -i -e 's/bobby/powerline-plain/g' /root/.bashrc && \
-    wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
-    tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
-    cp wkhtmltox/bin/wk* /usr/local/bin/
+    sed -i -e 's/bobby/powerline-plain/g' /root/.bashrc
 
 CMD apachectl -D FOREGROUND
