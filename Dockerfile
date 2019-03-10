@@ -4,7 +4,7 @@ FROM ubuntu:latest
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     apt-utils php php-phar php-iconv php-mysql wget \
-    curl php-curl php-mbstring php-dom php-gd php-xdebug sendmail \
+    curl php-curl php-mbstring php-dom php-gd php-xdebug php-zip sendmail \
     apache2 memcached php-memcached mc mysql-client htop git
 
 ENV WEB_SERVER_DOCROOT=docroot
