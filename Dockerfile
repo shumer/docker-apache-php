@@ -26,7 +26,7 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
     cp wkhtmltox/bin/wk* /usr/local/bin/ && \
     rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
-    apt-get install libfontconfig1 libxrender1 -y
+    apt-get install libfontconfig1 libxrender1 libssl1.0-dev -y
 
 
 CMD apachectl -D FOREGROUND
