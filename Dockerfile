@@ -27,6 +27,6 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     cp wkhtmltox/bin/wk* /usr/local/bin/ && \
     rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
     apt-get install libfontconfig1 libxrender1 -y && \
-    apt-get update && apt-get install libssl1.0-dev php-bcmath -y
+    apt-get update && apt-get install libssl1.0-dev php-bcmath jq -y
 
 CMD apachectl -D FOREGROUND
