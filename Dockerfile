@@ -7,6 +7,7 @@ RUN apt-get update && \
     curl php-curl php-mbstring php-dom php-gd php-xdebug php-zip php-ldap sendmail \
     apache2 memcached php-memcached mc mysql-client htop git gnupg2
 
+
 ENV WEB_SERVER_DOCROOT=docroot
 ADD ./apache.conf /etc/apache2/sites-available/
 ADD ./apache-ssl.conf /etc/apache2/sites-available/
@@ -30,5 +31,13 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     apt-get update && apt-get install libssl1.0-dev php-bcmath jq -y && \
     npm install -g yarn
 
+RUN echo "root:password" | chpasswd
+RUN useradd -rm -d /home/webdev -s /bin/bash -g root -G sudo -u 1000 webdev
+USER webdev
+WORKDIR /home/webdev
+RUN git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && \
+    ~/.bash_it/install.sh && \
+    sed -i -e 's/bobby/powerline-plain/g' /home/webdev/.bashrc
+WORKDIR /var/www/html
 
 CMD apachectl -D FOREGROUND
