@@ -28,16 +28,9 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     cp wkhtmltox/bin/wk* /usr/local/bin/ && \
     rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
     apt-get install libfontconfig1 libxrender1 composer npm -y && \
-    apt-get update && apt-get install libssl1.0-dev php-bcmath jq -y && \
+    apt-get update && apt-get install libssl1.0-dev php-bcmath jq sudo -y && \
     npm install -g yarn
 
-RUN echo "root:password" | chpasswd
-RUN useradd -rm -d /home/webdev -s /bin/bash -g root -G sudo -u 1000 webdev
-USER webdev
-WORKDIR /home/webdev
-RUN git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && \
-    ~/.bash_it/install.sh && \
-    sed -i -e 's/bobby/powerline-plain/g' /home/webdev/.bashrc
 WORKDIR /var/www/html
 
 CMD apachectl -D FOREGROUND
