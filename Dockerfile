@@ -28,7 +28,7 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
     apt-get install libfontconfig1 libxrender1 composer npm -y && \
     apt-get update && apt-get install libssl1.0-dev php-bcmath jq -y && \
-    apt-get remove cmdtest && npm install -g yarn \
+    npm install -g yarn
 
 
 CMD apachectl -D FOREGROUND
