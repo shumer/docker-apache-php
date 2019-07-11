@@ -26,8 +26,8 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
     cp wkhtmltox/bin/wk* /usr/local/bin/ && \
     rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get install libfontconfig1 libxrender1 composer yarn npm -y && \
     apt-get update && apt-get install libssl1.0-dev php-bcmath jq -y
 
