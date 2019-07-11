@@ -4,7 +4,7 @@ FROM ubuntu:latest
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     apt-utils php php-phar php-iconv php-mysql wget \
-    curl php-curl php-mbstring php-dom php-gd php-xdebug php-zip sendmail \
+    curl php-curl php-mbstring php-dom php-gd php-xdebug php-zip php-ldap sendmail \
     apache2 memcached php-memcached mc mysql-client htop git
 
 ENV WEB_SERVER_DOCROOT=docroot
@@ -26,7 +26,7 @@ RUN rm -rf /etc/apache2/sites-enabled/000-default.conf && \
     tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
     cp wkhtmltox/bin/wk* /usr/local/bin/ && \
     rm wkhtmltox-0.12.3_linux-generic-amd64.tar.xz && \
-    apt-get install libfontconfig1 libxrender1 -y && \
+    apt-get install libfontconfig1 libxrender1 composer yarn npm-y && \
     apt-get update && apt-get install libssl1.0-dev php-bcmath jq -y
 
 CMD apachectl -D FOREGROUND
